@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
     depends_on:
       - php
-      - database
+      - db
 
 
   php:
@@ -35,7 +35,7 @@ services:
       - host.docker.internal:host-gateway
     restart: unless-stopped
 
-  database:
+  db:
     image: postgres:15
     container_name: app-db
     environment:
