@@ -1,5 +1,6 @@
 .DEFAULT_GOAL := help
 install: ## Copy .env.example to .env and build docker image
+	cp .env.example .env
 	docker-compose build
 
 start: ## Run server http
