@@ -1,0 +1,106 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: Auth App
+            description: This is an recruitment REST API!
+            version: 1.0.0
+        components:
+            securitySchemes:
+                Bearer:
+                    type: http
+                    scheme: bearer
+                    bearerFormat: JWT
+        paths:
+            /api/registration:
+                post:
+                    tags:
+                        - Register
+                    summary: Description
+                    requestBody:
+                        content:
+                            application/json:
+                                schema:
+                                    properties:
+                                        email:
+                                            type: string
+                                        name:
+                                            type: string
+                                        password:
+                                            type:
+                                                string
+                    responses:
+                        '200':
+                            description: Successful
+                            content:
+                                application/json:
+                                    schema:
+                                        properties:
+                                            user:
+                                                type: user
+                                            status:
+                                                type: HTTP_STATUS
+            /api/refresh:
+                post:
+                    tags:
+                        - RefreshToken
+                    summary: Description
+                    requestBody:
+                        content:
+                            application/json:
+                                schema:
+                                    properties:
+                                        refresh_token:
+                                            type: string
+                    responses:
+                        '200':
+                            description: Successful
+                            content:
+                                application/json:
+                                    schema:
+                                        properties:
+                                            token:
+                                                type: string
+            /api/login_check:
+                post:
+                    responses:
+                        '200':
+                            description: Successful
+                            content:
+                                application/json:
+                                    schema:
+                                        properties:
+                                            token:
+                                                type: string
+                                            refresh_token:
+                                                type: string
+            /api/logout:
+                post:
+                    tags:
+                        - LogOut
+                    summary: Logout User
+                    requestBody:
+                        content:
+                            application/json:
+                                schema:
+                                    properties:
+                                        refresh_token:
+                                            type: string
+                    responses:
+                        '200':
+                            description: Successful
+                            content:
+                                application/json:
+                                    schema:
+                                        properties:
+                                            code:
+                                                type: HTTP_STATUS
+                                            message:
+                                                type: string
+
+        security:
+            - Bearer: [ ]
+    areas: # to filter documented areas
+        path_patterns:
+            - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
+        host_patterns: # document only routes with a host of the form api.*
+            - ^api\.
